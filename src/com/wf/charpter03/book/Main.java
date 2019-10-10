@@ -12,7 +12,7 @@ package com.wf.charpter03.book;
  * 实现抽象方法的子类也就决定了具体的处理---->只要在不同的子类中实现不同的具体处理，当父类的模板方法被调用时程序的行为也会不同，
  * 但是处理的流程都会按照父类中所定义的那样进行。
  */
-public class Client {
+public class Main {
 
 
 
