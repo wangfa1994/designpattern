@@ -26,5 +26,26 @@ package com.wf.charpter06;
  */
 public class DemoMain {
     public static void main(String[] args) {
+
+
+        /**
+         * 在prototype模式中有一下角色
+         *
+         *
+         * Prototype(原型)
+         * Prototype 角色负责定义用于复制现有实例来生成新实例方法。(Product 接口扮演此角色)
+         *
+         * ConcretePrototype(具体的原型)
+         * ConcretePrototype 角色负责实现复制现有实例并生成新实例的方法。(MessageBox 和 UnderlinePen类扮演此角色)
+         *
+         * Client(使用者)
+         * Client 角色负责使用复制实例的方法生成新的实例。(Manager 类扮演此角色)
+         *
+         *
+         *
+         *
+         */
+
+
     }
 }
