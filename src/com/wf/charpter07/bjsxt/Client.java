@@ -4,6 +4,8 @@ package com.wf.charpter07.bjsxt;
  * @Author: wangfa
  * @Date: 2019/5/1 14:59
  * @Description:
+ * 需要创建很多零件，会产生很多组装模式
+ * 建造者和工厂模式搭配使用
  */
 public class Client {
 

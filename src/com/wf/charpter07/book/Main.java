@@ -6,6 +6,12 @@ import java.util.Scanner;
  * @Author: wangfa
  * @Date: 2019/10/20 21:39
  * @Description: 组装复杂的实例
+ * 在构建大楼的时候，需要先打地基，搭建框架，然后一层一层的盖起来。
+ * 通常，在建造这种具有复杂结构的物体时，很难一气呵成，
+ * 我们需要首先建造组成这个物体的各个部分，然后分阶段将他们组装起来。
+ *
+ *
+ *
  */
 public class Main {
 
@@ -21,7 +27,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
-
+        System.out.println("请输入plain 或者 html");
         Scanner scanner = new Scanner(System.in);
         String input= scanner.next();
 
