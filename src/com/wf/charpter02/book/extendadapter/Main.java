@@ -10,6 +10,10 @@ package com.wf.charpter02.book.extendadapter;
 public class Main {
 
 
+    /**
+     * 将输入字符串显示为(Hello) 或者 *Hello* 的程序
+     */
+
     public static void main(String[] args) {
         Print print = new PrintBanner("Hello");
         print.printWeak();

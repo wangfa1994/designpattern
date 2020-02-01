@@ -3,7 +3,7 @@ package com.wf.charpter02.book.objectadapter;
 /**
  * @Author: wangfa
  * @Date: 2019/9/29 17:57
- * @Description:
+ * @Description: 需求接口
  */
 public abstract class Print {
 

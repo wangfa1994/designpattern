@@ -7,7 +7,11 @@ package com.wf.charpter02.book.extendadapter;
  */
 public class Banner  {
 
+    private String string;
 
+    public Banner(String string) {
+        this.string = string;
+    }
 
     /**
      *
@@ -24,11 +28,4 @@ public class Banner  {
     }
 
 
-
-
-    private String string;
-
-    public Banner(String string) {
-        this.string = string;
-    }
 }

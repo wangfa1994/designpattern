@@ -12,8 +12,6 @@ package com.wf.charpter02.book.extendadapter;
 public class PrintBanner extends Banner implements Print {
 
 
-
-
     public PrintBanner(String string) {
         super(string);
     }
