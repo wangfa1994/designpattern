@@ -6,11 +6,19 @@ import java.util.List;
 /**
  * @Author: wangfa
  * @Date: 2018/12/22 09:41
- * @Description: 迭代器模式
+ * @Description: Iterator
+ * 迭代器模式------》一个一个遍历
+ *
+ * 通用的for-i循环，在for循环中i++的作用是让i的值每次循环加一，这样就可以访问数组中的下一个元素，也就是实现了数组的遍历。
+ * 将循环变量i,进行抽象化，通用化之后形成的模式，在设计模式中叫做Iterator模式。
+ * 迭代器模式用于在数据集合中按照顺序遍历集合。
+ *
+ *
  */
+
+
 public class Main {
-    /**
-     *  迭代器模式用于在数据集合中按照顺序遍历集合
+    /*eg: 将书(Book)放置到书架(BookShelf)中，并将数的名字按照顺序显示出来
      */
     public static void main(String[] args) {
 

@@ -1,5 +1,7 @@
 package com.wf.charpter01.book;
 
+import java.util.ArrayList;
+
 /**
  * @Author: wangfa
  * @Date: 2018/12/22 10:13
@@ -12,6 +14,8 @@ public class BookShelf implements Aggregate {
 
     private Book[] books;
     private int last = 0;
+
+    private ArrayList<Book> booksA;
 
     public BookShelf(int maxSize) {
         this.books = new Book[maxSize];
