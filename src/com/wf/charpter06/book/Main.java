@@ -6,10 +6,11 @@ import com.wf.charpter06.book.framework.Product;
 /**
  * @Author: wangfa
  * @Date: 2019/10/20 09:33
- * @Description:  通过复制生成实例
+ * @Description: prototype模式
+ * 原型模式------>通过复制生成实例
  *
  *
- * 有时候，我们需要在不指定类名的前提下生成实例
+ * 有时候，我们需要在不指定类名的前提下生成实例,而是要根据现有的实例来生成新的实例。
  *  1)对象种类繁多，无法将他们整合到一个类中---->需要处理的对象太多，如果将他们分别作为一个类，必须要编写很多个类文件
  *
  * 2)很难根据类生成实例时--->生成的实例过程太过复杂，很难根据类来生成实例---->在想生成一个和之前用户通过操作所创建出的
@@ -34,7 +35,6 @@ public class Main {
      */
     public static void main(String[] args) {
         // 首先生成Manager的实例，接着在Manager实例中注册了UnderlinePen和MessageBox的实例
-
 
         Manager manager = new Manager();
 

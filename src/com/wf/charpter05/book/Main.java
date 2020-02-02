@@ -4,6 +4,8 @@ package com.wf.charpter05.book;
  * @Author: wangfa
  * @Date: 2019/10/20 09:14
  * @Description:
+ *  单例类，只生成一个实例
+ *
  */
 public class Main {
 

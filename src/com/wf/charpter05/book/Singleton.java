@@ -3,7 +3,7 @@ package com.wf.charpter05.book;
 /**
  * @Author: wangfa
  * @Date: 2019/10/20 09:15
- * @Description: 单例类，只生成一个实例
+ * @Description:
  */
 public class Singleton {
 
