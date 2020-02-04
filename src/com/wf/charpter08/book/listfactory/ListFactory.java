@@ -8,7 +8,7 @@ import com.wf.charpter08.book.factory.Tray;
 /**
  * @Author: wangfa
  * @Date: 2019/11/17 14:48
- * @Description: 包含具体工厂，零件，产品的包
+ * @Description:
  *
  * 表示具体工厂的类(制作ListLink,ListTray,ListPage)
  *

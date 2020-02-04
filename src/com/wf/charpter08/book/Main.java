@@ -28,16 +28,24 @@ public class Main {
     /**
      * 将带有层次关系的链接的集合制作成HTML文件。
      *
+     * factory包:包含抽象工厂，零件，产品的包
+     * listfactory包: 包含具体工厂，零件，产品的包
+     *
      * Main类中使用抽象工厂生产零件并将零件组装成产品，
      * Main类中只引用了factory包，从这一点可以看出，该类并没有使用任何具体零件，产品和工厂
+     *
+     * 具体工厂的类名是通过输入来进行指定的，如果要使用listfactory包中的ListFactory,可以输入 com.wf.charpter08.book.listfactory.ListFactory
+     * Main会使用getFactory方法生成改输入所对应的工厂，并将其保存在factory中，然后使用factory生成Link,Tray
+     * 然后将Link，Tray放入到Tray中，生成Page并将结果输出值文件。
      *
      */
     public static void main(String[] args) {
 
         System.out.println("请输入实现类类名");
-        System.out.println("com.wf.charpter08.book.listfactory.ListLink/ListFactory/ListPage/ListTray");
+        System.out.println("com.wf.charpter08.book.listfactory.ListFactory");
+        System.out.println("com.wf.charpter08.book.tablefactory.TableFactory");
         Scanner scanner = new Scanner(System.in);
-        String className= scanner.next();
+        String className= scanner.nextLine();
 
         Factory factory = Factory.getFactory(className);
 

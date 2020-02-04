@@ -3,8 +3,8 @@ package com.wf.charpter08.book.factory;
 /**
  * @Author: wangfa
  * @Date: 2019/11/17 14:46
- * @Description: factory包:包含抽象工厂，零件，产品的包
- * 表示抽象工厂的类
+ * @Description:
+ * 表示抽象工厂的类(制作Link,Tray,Page)
  *
  * 抽象零件(Item,Link,Tray)和抽象产品(Page)
  *
@@ -20,7 +20,9 @@ public abstract class Factory {
         Factory factory = null;
         try {
             factory = (Factory) Class.forName(className).newInstance();
-        }  catch (Exception e) {
+        }  catch (ClassNotFoundException e) {
+            System.out.println("没有找到"+className+"类。");
+        } catch (Exception e){
             e.printStackTrace();
         }
         return factory;

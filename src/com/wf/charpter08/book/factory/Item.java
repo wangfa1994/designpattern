@@ -12,6 +12,9 @@ public abstract class Item {
     // 表示项目的标题
     protected String caption;
 
+    /**
+     * 抽象方法，需要子类来实现，该方法会返回HTML文件的内容
+     */
     public  abstract String makeHTML();
 
     public Item(String caption) {

@@ -8,7 +8,7 @@ import java.util.Iterator;
 /**
  * @Author: wangfa
  * @Date: 2019/11/17 14:54
- * @Description:具体零件:表示含有Link 和 Tray 的类
+ * @Description: 具体零件:表示含有Link和Tray 的类
  *
  * ListTray 是Tray的子类，
  *

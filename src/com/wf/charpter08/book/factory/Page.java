@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * @Author: wangfa
  * @Date: 2019/11/17 14:52
- * @Description: 抽象零件:表示HTML页面的类
+ * @Description: 抽象产品:表示HTML页面的类
  *
  * Page类是抽象地表示HTML页面的类，
  * 如果将Link 和 Tray 比喻成抽象的零件，那么Page类就表示产品。
@@ -38,6 +38,7 @@ public abstract class Page {
         try {
             String fileName = title+".html";
             Writer writer  = new FileWriter(fileName);
+            // 注意是自己的makeHTML()
             writer.write(this.makeHTML());
             writer.close();
             System.out.println(fileName+"编写完成。");
