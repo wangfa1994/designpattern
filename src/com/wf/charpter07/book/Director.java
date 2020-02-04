@@ -7,8 +7,9 @@ package com.wf.charpter07.book;
  *
  * Director类使用Builder类中声明的方法来编写文档
  *
+ *
  * Director 类的构造函数的参数是Builder类型的，
- * 但是实际上我们并不会讲Builder类的实例作为参数传递给Director类的，因为Builder是抽象类，无法生成实例，
+ * 但是实际上我们并不会将Builder类的实例作为参数传递给Director类的，因为Builder是抽象类，无法生成实例，
  * 传递的是Builder类的子类，而正是因为这些Builder类的子类，才决定了编写出不同的文档的形式
  *
  *
@@ -22,7 +23,7 @@ public class Director {
     }
 
 
-    // 编写文档方法
+    // 编写文档方法(建造)
     public void construct(){
         builder.makeTitle("Greeting");
         builder.makeString("从早上到下午");

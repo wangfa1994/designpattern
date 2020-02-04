@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 /**
  * @Author: wangfa
  * @Date: 2019/11/3 16:41
- * @Description: 使用了HTML编写文档的类
+ * @Description: 使用了HTML编写文档的类，继承了Builder类，实现了各个部分的编写的逻辑
  */
 public class HTMLBuilder  extends  Builder{
 
