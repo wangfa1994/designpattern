@@ -33,6 +33,7 @@ public class DemoMain {
          *
          *
          * Prototype(原型)
+         *
          * Prototype 角色负责定义用于复制现有实例来生成新实例方法。(Product 接口扮演此角色)
          *
          * ConcretePrototype(具体的原型)
