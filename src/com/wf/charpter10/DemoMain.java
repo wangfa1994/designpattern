@@ -23,5 +23,12 @@ public class DemoMain {
      *
      *
      *
+     *
+     * 扩展:
+     *  1)为什么要特意编写strategy角色，strategy模式将算法与其他部分进行分离开来，只是定义了与算法相关的接口，
+     *  然后在程序中以委托的方式使用算法，这样的好处是，我们使用了strategy模式，就不必修改strategy角色的接口(API),仅仅修改
+     *  ConcreteStrategy角色即可。而且，使用了委托这种弱关联关系可以很方便的整体替换算法。
+     *  2)程序中可以切换策略，在程序运行时可以切换ConcreteStrategy角色，象棋程序中切换AI水平
+     *
      */
 }

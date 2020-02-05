@@ -4,7 +4,7 @@ package com.wf.charpter10.book;
  * @Author: wangfa
  * @Date: 2019/11/5 19:16
  * @Description: strategy 模式
- * 整体替换算法
+ * 策略模式----->整体替换算法
  *
  * 无论什么程序，其主要目的都是解决问题，而为了解决问题，我们有需要编写特定的算法
  * 使用strategy模式可以整体的替换算法的实现部分。
