@@ -3,7 +3,9 @@ package com.wf.charpter09.book;
 /**
  * @Author: wangfa
  * @Date: 2019/10/29 19:48
- * @Description: 类的实现层次结构，用字符串显示的类
+ * @Description: 类的实现层次结构，用字符串显示的类，
+ * 它不直接显示字符串，它继承了DisplayImpl,作为子类来使用rawOpen,rawPrint,rawClose方法进行显示。
+ *
  */
 public class StringDisplayImpl  extends DisplayImpl{
 

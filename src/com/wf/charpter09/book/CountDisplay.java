@@ -11,7 +11,11 @@ public class CountDisplay extends Display{
         super(impl);
     }
 
-    // 新增功能，循环显示times次
+    /**
+     *  新增功能，循环显示times次
+     *
+     *  继承Display类open，print，close方法，并使用他们来增加这个新功能
+      */
     public void multiDisplay(int times){
         open();
         for (int i = 0; i < times; i++) {

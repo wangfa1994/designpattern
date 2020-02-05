@@ -23,16 +23,31 @@ public class Display {
     }
 
 
+    /**
+     * 显示前的处理
+     */
     public void open(){
         impl.rawOpen();
     }
+
+    /**
+     * 显示处理
+     */
     public void print(){
         impl.rawPrint();
     }
 
+    /**
+     * 显示后的处理
+     */
     public void close(){
         impl.rawClose();
     }
+
+    /**
+     * 3个方法的实现都调用了impl字段的实现方法，Display的接口API就被转换成DisplayImpl的接口
+     * display方法调用open,print,close这3个display类的接口(API)进行了显示处理。
+     */
 
 
     public final void display(){
