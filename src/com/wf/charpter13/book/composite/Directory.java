@@ -14,7 +14,7 @@ public class Directory  extends Entry {
 
     private String  directoryName;
 
-    private ArrayList directory = new ArrayList();
+    private ArrayList<Entry> directory = new ArrayList<>();
 
 
     public Directory(String directoryName) {

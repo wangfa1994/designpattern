@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
  */
 public class StartHandler implements InvocationHandler {
 
+    // 这个只是针对star进行增强
     private Star realStar;
 
     public StartHandler(Star realStar) {
@@ -22,8 +23,9 @@ public class StartHandler implements InvocationHandler {
         System.out.println("真正的方法执行前。。面谈。合同");
 
         if(method.getName().equals("sing")){
-            method.invoke(realStar,args);
-            //  Object obj = method.invoke(realStar,args);
+            //method.invoke(realStar,args);
+              Object obj = method.invoke(realStar,args);
+            System.out.println(obj);
         }
 
         System.out.println("真正的方法执行后。。收款");

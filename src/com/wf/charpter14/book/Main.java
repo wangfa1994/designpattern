@@ -36,7 +36,7 @@ public class Main {
         Support elmo = new OddSupport("Elmo");
         Support fred = new LimitSupport("Fred", 300);
 
-        alice.setNext(alice).setNext(bob).setNext(charlie).setNext(diana).setNext(elmo).setNext(fred);
+        alice.setNext(bob).setNext(charlie).setNext(diana).setNext(elmo).setNext(fred);
         for (int i = 0; i < 500; i += 33) {
             alice.support(new Trouble(i));
         }

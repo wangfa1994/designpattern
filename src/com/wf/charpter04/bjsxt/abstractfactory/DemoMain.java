@@ -19,5 +19,10 @@ public class DemoMain {
         Engine engine  = carFactory.createEngine();
         engine.run();
         engine.start();
+        Seat seat = carFactory.createSeat();
+        seat.seatCate();
+
+        Tyre tyre = carFactory.createTyre();
+        tyre.TypePrice();
     }
 }

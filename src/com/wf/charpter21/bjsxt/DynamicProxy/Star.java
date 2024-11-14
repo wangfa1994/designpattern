@@ -25,7 +25,7 @@ public interface Star {
     /**
      * 唱歌
      */
-    void sing();
+    String  sing();
 
     /**
      * 收尾款

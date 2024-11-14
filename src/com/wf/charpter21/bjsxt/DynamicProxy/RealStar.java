@@ -23,8 +23,9 @@ public class RealStar implements Star {
     }
 
     @Override
-    public void sing() {
+    public String sing() {
         System.out.println("真实->sing");
+        return "sing 结束";
     }
 
     @Override

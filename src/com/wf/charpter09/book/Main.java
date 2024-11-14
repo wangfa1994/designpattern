@@ -34,14 +34,15 @@ public class Main {
         *
          */
 
-        Display d1 = new Display(new StringDisplayImpl("hello,china"));
-        Display d2 = new CountDisplay(new StringDisplayImpl("hello,world"));
-        CountDisplay d3 = new CountDisplay(new StringDisplayImpl("hello,universe"));
+        Display d1 = new Display(new StringDisplayImpl("hello,universe"));
+        Display d2 = new CountDisplay(new StringDisplayImpl("hello,universe"));
+        CountDisplay d3 = new CountDisplay(new StringDisplayImpl("hello,universe")); //增加功能用的是子类实例
         d1.display();
+        System.out.println("000000000000000000000000");
         d2.display();
-        d3.display();
-
-        d3.multiDisplay(5);
+        System.out.println("000000000000000000000000");
+        d3.display(); //自己的实现层次
+        d3.multiDisplay(5); // 增加的功能层次
 
 
         /**

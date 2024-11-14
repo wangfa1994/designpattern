@@ -43,11 +43,13 @@ public abstract class Support {
         return "[" + name + "]";
     }
 
+    // 属于自己的独有方法
     protected void done(Trouble trouble){ // 解决
         System.out.println(trouble+"is resolved by"+this+"..");
     }
 
 
+    // 属于自己的独有方法
     protected void fail(Trouble trouble){ // 未解决
         System.out.println(trouble+"cannot be resolved..");
     }
