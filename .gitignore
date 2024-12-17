@@ -2,3 +2,9 @@
 .idea/
 /target
 out/
+*.iml
+.idea/
+
+**/target/
+
+*.DS_Store

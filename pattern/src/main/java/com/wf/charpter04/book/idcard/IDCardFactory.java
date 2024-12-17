@@ -1,6 +1,5 @@
 package com.wf.charpter04.book.idcard;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import com.wf.charpter04.book.framework.Factory;
 import com.wf.charpter04.book.framework.Product;
 
