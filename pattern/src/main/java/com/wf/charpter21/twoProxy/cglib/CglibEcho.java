@@ -6,4 +6,9 @@ public class CglibEcho {
         System.out.println("进入了原始对象echo");
         return s;
     }
+
+    public String echo1(String s){
+        System.out.println("进入了原始对象echo1");
+        return s;
+    }
 }
