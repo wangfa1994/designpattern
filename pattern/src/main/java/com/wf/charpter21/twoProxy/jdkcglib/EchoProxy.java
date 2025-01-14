@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 
 public class EchoProxy implements InvocationHandler {
     /**
-    * @Desc :
+    * @Desc :  Object proxy 代理类的实例对象，不是我们的目标实例对象，代理类中调用的时候传递的是this
     * @Author : Mr.WangF
     **/
     @Override
@@ -19,14 +19,14 @@ public class EchoProxy implements InvocationHandler {
         // 保存生成的字节码文件
         addClassToDisk(proxy.getClass().getName(), proxy.getClass());
 
-        System.out.println("进入代理开始========");
+        System.out.println("进入一层代理开始========");
 
         if(method.getName().equals("echo") && method.getDeclaringClass().isAssignableFrom(EchoService.class)){
             EchoServiceImpl echoService = new EchoServiceImpl();
             System.out.println("进入了代理类中的方法，开始方法前逻辑");
             String echo = echoService.echo((String) args[0]);
             System.out.println("进入了代理类的方法，方法执行结束:"+echo);
-            System.out.println("进入代理结束========");
+            System.out.println("进入一层代理结束========");
             return echo;
         }
 

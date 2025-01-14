@@ -1,9 +1,6 @@
 package com.wf.charpter21.twoProxy.cglib;
 
 
-
-
-import com.wf.charpter21.twoProxy.jdkcglib.EchoService;
 import net.sf.cglib.core.DefaultGeneratorStrategy;
 import net.sf.cglib.core.DefaultNamingPolicy;
 import net.sf.cglib.proxy.*;
@@ -18,14 +15,111 @@ public class EchoProxyMain {
 
     public static void main(String[] args) {
 
-        //firstEnhancer();
-
-        //secondEnhancer();
-
-       // threeEnhancer();
+        firstEnhancer();
+        System.out.println("====");
+        secondEnhancer();
+        System.out.println("====");
+        secondEnhancer1();
+        System.out.println("====");
+        threeEnhancer();
        // fourEnhancer();
         // fiveEnhancer();
-        checkError();
+        //checkError();
+
+    }
+
+    // ================== FixedValue类型的回调  FixedValue 用于改变返回值 ，所有的方法都会拦截，然后直接返回固定值，不进行原始方法的执行 ============
+    private static void firstEnhancer() {
+        Enhancer enhancer = new Enhancer(); //Enhancer 相当于jdk代理中的Proxy
+        enhancer.setSuperclass(CglibEcho.class);
+        // 进行回调 callBack的类型有多种  FixedValue 用于改变返回值 ，所有的方法都会拦截，如果拦截到方法返回值不为字符串的话，会进行报错
+        enhancer.setCallback(new FixedValue() {
+            @Override
+            public Object loadObject() throws Exception {
+                System.out.println("hello cglib FixedValue");
+                return "loadObject method callback!";
+            }
+        });
+
+        // 进行文件保存
+        saveClassFile(enhancer,"FixedValue");
+
+
+        CglibEcho proxy = (CglibEcho) enhancer.create();
+        // System.out.println(proxy.hashCode()); // 报错，因为FixedValue 拦截的总会返回一个String对象 而hashCode则需要number
+        System.out.println("代理之后返回："+proxy.echo("echo")); // 代理之后返回就改变了原有函数的返回值
+    }
+
+
+    //============ InvocationHandler类型的回调 这个和jdk的类似proxy参数是代理类的实例，会造成循环,需要将我们的目标对象传递，才能使用 =============
+    private static void secondEnhancer() {
+
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(CglibEcho.class);
+
+        InvocationHandler helloCglibInvoke = new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                System.out.println("hello cglib InvocationHandler");
+                return "invoke method callback";
+            }
+
+            ;
+        };
+
+        // 进行回调
+        enhancer.setCallbacks(new Callback[]{helloCglibInvoke});
+        CglibEcho proxy = (CglibEcho) enhancer.create();
+        System.out.println("代理之后返回："+proxy.echo("echo")); // 这里不会打印原始对象中的内容，只进行代理对象的逻辑处理，直接返回
+
+    }
+    private static void secondEnhancer1() {
+
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(CglibEcho.class);
+
+        CglibEchoProxy helloCglibInvoke = new CglibEchoProxy(new CglibEcho());
+
+        // 进行回调
+        enhancer.setCallbacks(new Callback[]{helloCglibInvoke});
+        CglibEcho proxy = (CglibEcho) enhancer.create();
+        System.out.println("代理之后返回："+proxy.echo("echo")); // 这里不会打印原始对象中的内容，只进行代理对象的逻辑处理，直接返回
+    }
+    static class CglibEchoProxy implements InvocationHandler{
+
+        private CglibEcho cglibEcho;
+
+        public CglibEchoProxy(CglibEcho cglibEcho) {
+            this.cglibEcho = cglibEcho;
+        }
+
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            System.out.println("hello cglib InvocationHandler With CglibEcho");
+            return method.invoke(cglibEcho,args);
+        }
+    }
+
+
+
+
+
+
+    //============ MethodInterceptor类型的回调 这个才是牛逼之处，可以直接进行原逻辑的调用，而不需要我们传入目标对象 =============
+    private static void threeEnhancer() {
+        Enhancer enhancer = new Enhancer(); //Enhancer 相当于jdk代理中的Proxy
+        enhancer.setSuperclass(CglibEcho.class);
+        enhancer.setCallback(new MethodInterceptor() {
+            @Override
+            public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+                System.out.println("hello cglib MethodInterceptor");
+                Object result = methodProxy.invokeSuper(o, objects); // 执行代理对象的代理方法
+                return result;
+            }
+        });
+
+        CglibEcho proxy = (CglibEcho)enhancer.create();
+        System.out.println("代理之后返回："+proxy.echo("echo"));
 
     }
 
@@ -193,108 +287,45 @@ public class EchoProxyMain {
 
 
 
-    private static void threeEnhancer() {
-        Enhancer enhancer = new Enhancer(); //Enhancer 相当于jdk代理中的Proxy
-        enhancer.setSuperclass(CglibEcho.class);
-        enhancer.setCallback(new MethodInterceptor() {
-            @Override
-            public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-                System.out.println("进入了代理代理逻辑intercept："+ Arrays.toString(objects));
-                Object result = methodProxy.invokeSuper(o, objects);
-                System.out.println("原始方法进行执行完成，返回："+result);
-                return result;
-            }
-        });
 
+
+
+
+
+
+
+
+
+
+    private static void saveClassFile(Enhancer enhancer,String fileName){
         enhancer.setStrategy(new DefaultGeneratorStrategy() {
             protected byte[] transform(byte[] b) {
-                addClassToDisk(b);
-                return b;
+                FileOutputStream out = null;
+                try {
+                    // jdk 动态代理会在项目的根目录下生成对应的class文件，$Proxy
+                    out = new FileOutputStream(fileName+"$CglibProxy.class");
+                    //将代理对象的class字节码写到硬盘上
+                    out.write(b);
+                    out.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
-            }});
-        CglibEcho cglibEcho = (CglibEcho)enhancer.create();
-        cglibEcho.echo("echo");
-
-    }
-
-    private static void secondEnhancer() {
-
-        Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(SampleClass.class);
-
-        FixedValue helloCglibLoadObject = new FixedValue() {
-            @Override
-            public Object loadObject() throws Exception {
-                System.out.println("hello cglib loadObject");
-                return "loadObject method callback!";
-            }
-        };
-
-        InvocationHandler helloCglibInvoke = new InvocationHandler() {
-            @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                System.out.println("hello cglib invoke");
-                return "invoke method callback";
-            }
-
-            ;
-        };
-
-        // 进行回调
-        enhancer.setCallbacks(new Callback[]{helloCglibLoadObject,helloCglibInvoke});
-        SampleClass proxy = (SampleClass) enhancer.create();
-        System.out.println(proxy.test(null));
-
-
-    }
-
-    private static void firstEnhancer() {
-        Enhancer enhancer = new Enhancer(); //Enhancer 相当于jdk代理中的Proxy
-        enhancer.setSuperclass(SampleClass.class);
-        // 进行回调
-        enhancer.setCallback(new FixedValue() {
-            @Override
-            public Object loadObject() throws Exception {
-                System.out.println("hello cglib loadObject");
-                return "loadObject method callback!";
-            }
-        });
-
-        // 进行文件保存
-        enhancer.setStrategy(new DefaultGeneratorStrategy() {
-            protected byte[] transform(byte[] b) {
-                addClassToDisk(b);
                 return b;
 
             }});
 
-        SampleClass proxy = (SampleClass) enhancer.create();
-        // System.out.println(proxy.hashCode()); // 报错，因为FixedValue 拦截的总会返回一个String对象 而hashCode则需要number
-        System.out.println(proxy.test(null));
     }
-
-
-
-
 
     private static void addClassToDisk(byte[] b) {
 
-        FileOutputStream out = null;
-        try {
-            // jdk 动态代理会在项目的根目录下生成对应的class文件，$Proxy
-            out = new FileOutputStream("$CglibProxy.class");
-            //将代理对象的class字节码写到硬盘上
-            out.write(b);
-            out.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
     }
 
 
@@ -336,5 +367,37 @@ public class EchoProxyMain {
 
             return 0;
         }
+    }
+
+
+    private static void secondEnhancerss() {
+
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(SampleClass.class);
+
+        FixedValue helloCglibLoadObject = new FixedValue() {
+            @Override
+            public Object loadObject() throws Exception {
+                System.out.println("hello cglib loadObject");
+                return "loadObject method callback!";
+            }
+        };
+
+        InvocationHandler helloCglibInvoke = new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                System.out.println("hello cglib invoke");
+                return "invoke method callback";
+            }
+
+            ;
+        };
+
+        // 进行回调
+        enhancer.setCallbacks(new Callback[]{helloCglibLoadObject,helloCglibInvoke});
+        SampleClass proxy = (SampleClass) enhancer.create();
+        System.out.println(proxy.test(null));
+
+
     }
 }
