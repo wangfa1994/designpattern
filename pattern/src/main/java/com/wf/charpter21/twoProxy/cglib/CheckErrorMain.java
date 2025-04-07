@@ -100,7 +100,7 @@ public class CheckErrorMain {
         Enhancer enhancer = new Enhancer();
         enhancer.setClassLoader(Thread.currentThread().getContextClassLoader());
         enhancer.setUseCache(false);
-        enhancer.setSuperclass(CglibEcho.class);
+        enhancer.setSuperclass(CglibEcho.class); // 既设置了目标类 又设置了目标接口 ，这样的话，我们的代理类就会继承代理类，实现代理接口,
         enhancer.setInterfaces(new Class[]{CglibAnother.class});
         enhancer.setCallbackFilter(new CallbackFilter() {
             @Override
